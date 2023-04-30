@@ -20,8 +20,10 @@ async function handleSubmit () {
             },
             body:JSON.stringify(user)
         }).then((response)=>{
-            response.json().then((result)=>{
-                if(response.status===200){
+            if(response.status===200){
+               response.json().then((result)=>{
+                    console.log(result)
+                
                     localStorage.setItem("userName",result.username)
                     localStorage.setItem("password",result.password)
                     localStorage.setItem("fristName",result.firstName)
@@ -31,11 +33,11 @@ async function handleSubmit () {
                     localStorage.setItem("role",role)
                     alert("Login successful")
                     window.location.href="/AdminHome"
-                }
-                else{
-                    alert("Invalid username or password")
-                }
-            })
+              })
+            }
+            else{
+                alert("Invalid username or password")
+            }
         }).catch((err)=>{
             console.log(err)
         }
@@ -51,8 +53,9 @@ async function handleSubmit () {
         },
         body:JSON.stringify(user)
     }).then((response)=>{
-        response.json().then((result)=>{
-            if(response.status===200){
+        if(response.status===200){
+            response.json().then((result)=>{
+            
                 localStorage.setItem("userName",result.username)
                 localStorage.setItem("password",result.password)
                 localStorage.setItem("geography",result.geography)
@@ -62,10 +65,10 @@ async function handleSubmit () {
                 alert("Login successful")
                 window.location.href="/ShippingHome"
             }
-            else{
-                alert("Invalid username or password")
-            }
-        })
+        )}
+        else{
+            alert("Invalid username or password")
+        }
     }).catch((err)=>{
         console.log(err)
     }
@@ -81,13 +84,13 @@ async function handleSubmit () {
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign In</h3>
           <div className="form-group mt-3">
-            <label>Email address</label>
+            <label>UserName</label>
             <input
               type="text"
               value={username}
             onChange={(e) => setUsername(e.target.value)}
               className="form-control mt-1"
-              placeholder="Enter email"
+              placeholder="Enter Your Username"
             />
           </div>
           <div className="form-group mt-3">
@@ -117,7 +120,7 @@ async function handleSubmit () {
            
         
           <p className="forgot-password text-right mt-2">
-            Forgot <a href="#">password?</a>
+            Forgot <a href="#"></a>
           </p>
         </div>
       </div>

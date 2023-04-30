@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Table from 'react-bootstrap/Table';
 
 export function ShippingRequests() {
+    if(localStorage.getItem("role")!=="delivery"){
+        window.location.href="/SignIn"
+    }
     const [requests, setRequests] = useState([]);
     const name=localStorage.getItem("userName")
     

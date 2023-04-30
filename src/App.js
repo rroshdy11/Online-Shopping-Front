@@ -12,6 +12,7 @@ import { AddShipping } from './Components/Admin/AddShipping';
 import ShippingHome from './Components/Shipping/ShippingHome';
 import {ShippingRequests} from './Components/Shipping/ShippingRequests';
 import { CompanyRequests } from './Components/Shipping/CompanyRequests';
+import { SignUp } from './Components/SingUp/SignUp';
 function App() {
   
   return (
@@ -52,7 +53,9 @@ function App() {
         <Route path="/CompanyRequests" element={
           <CompanyRequests />
         } />
-        
+        <Route path="/SignUp" element={
+          <SignUp />
+        } />
         
 
       </Routes>

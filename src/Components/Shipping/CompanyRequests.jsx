@@ -2,6 +2,9 @@ import Table from 'react-bootstrap/Table';
 import { useState,useEffect } from "react";
 
 export const CompanyRequests=()=>{
+    if(localStorage.getItem("role")!=="delivery"){
+        window.location.href="/SignIn"
+    }
 
     const [requests, setRequests] = useState([]);
     const name=localStorage.getItem("userName")
