@@ -11,6 +11,7 @@ import { AddSelling } from './Components/Admin/AddSelling';
 import { AddShipping } from './Components/Admin/AddShipping';
 import ShippingHome from './Components/Shipping/ShippingHome';
 import {ShippingRequests} from './Components/Shipping/ShippingRequests';
+import { CompanyRequests } from './Components/Shipping/CompanyRequests';
 function App() {
   
   return (
@@ -48,6 +49,10 @@ function App() {
         <Route path="/ShippingRequests" element={
           <ShippingRequests />
         } />
+        <Route path="/CompanyRequests" element={
+          <CompanyRequests />
+        } />
+        
         
 
       </Routes>

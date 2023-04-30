@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
 import Table from 'react-bootstrap/Table';
+import { useState,useEffect } from "react";
 
-export function ShippingRequests() {
+export const CompanyRequests=()=>{
+
     const [requests, setRequests] = useState([]);
     const name=localStorage.getItem("userName")
     
     useEffect(() => {
-        fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/shippingCompany/getAllShippingRequestForShippingCompany/${name}`,{
+        fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/shippingCompany/getMyShippings/${name}`,{
             method:"GET",
             headers:{
                 "Content-Type":"application/json"
@@ -30,18 +31,18 @@ export function ShippingRequests() {
                     <td>{item.customerName}</td>
                     <td>{item.shippingAddress}</td>
                     <td>{item.shippingState}</td>
+                    { item.shippingState!=="Delivered"&&
                     <td>
-                        <button className="btn btn-success" onClick={()=>{acceptRequest(item.id)}}>Accept</button>
-                    </td>
-
+                        <button className="btn btn-success" onClick={()=>{markDelivered(item.id)}}>Delivered</button>
+                    </td>}
                     <td></td>
                 </tr>
             )
         })
     }
-    async function acceptRequest(productId){
+    async function markDelivered(productId){
         const res = await fetch(
-            `http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/shippingCompany/acceptShippingRequest/${productId}/${name}`,
+            `http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/shippingCompany/markAsDelivered/${productId}`,
             {
                 method: "POST",
                 headers: {
@@ -51,7 +52,7 @@ export function ShippingRequests() {
             );
             const data = await res.text();
             if (data === "Selling Log Updated Successfully") {
-                alert("Shipping Request Accepted");
+                alert("Marked as Delivered");
                 window.location.href = "/CompanyRequests";
             } else {
                 alert(data);
@@ -59,10 +60,7 @@ export function ShippingRequests() {
     }
 
 
-                    
-
-    return (
-    
+    return(
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -72,7 +70,7 @@ export function ShippingRequests() {
               <th>customer Name</th>
               <th>shippingAddress</th>
                 <th>Shipping State</th>
-                <th>Accept Request</th>
+                <th>Mark Delivered</th>
             </tr>
           </thead>
           <tbody>
@@ -81,5 +79,5 @@ export function ShippingRequests() {
             }
           </tbody>
         </Table>
-      );
+    )
 }

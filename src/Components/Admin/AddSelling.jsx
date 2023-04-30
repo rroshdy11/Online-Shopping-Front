@@ -34,8 +34,8 @@ export const AddSelling=()=>{
               <label>Company Name</label>
               <input
                 type="text"
-                value={company.name}
-              onChange={(e) => setCompany({...company,name:e.target.value})}
+                value={company.username}
+              onChange={(e) => setCompany({...company,username:e.target.value})}
                 className="form-control mt-1"
                 placeholder="Enter Company Name"
               />
