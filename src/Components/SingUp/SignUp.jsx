@@ -91,7 +91,7 @@ export const SignUp = () => {
   }
   return (
     <div className="Auth-form-container">
-      <form className="Auth-form">
+      <div className="Auth-form">
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign Up</h3>
           <div className="form-group mt-3">
@@ -199,12 +199,8 @@ export const SignUp = () => {
               Submit
             </button>
           </div>
-
-          <p className="forgot-password text-right mt-2">
-            Forgot <a href="#">password?</a>
-          </p>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

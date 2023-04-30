@@ -80,7 +80,7 @@ async function handleSubmit () {
 }
   return (
     <div className="Auth-form-container">
-      <form className="Auth-form"  >
+      <div className="Auth-form"  >
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign In</h3>
           <div className="form-group mt-3">
@@ -126,7 +126,7 @@ async function handleSubmit () {
              <a href="/SignUp"> Account?</a>
           </p>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
