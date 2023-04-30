@@ -27,7 +27,7 @@ function AllShipping() {
             return(
                 <tr key={index} >
                     <td>{index}</td>
-                    <td>{item.name}</td>
+                    <td>{item.username}</td>
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
                     <td>{item.geography}</td>

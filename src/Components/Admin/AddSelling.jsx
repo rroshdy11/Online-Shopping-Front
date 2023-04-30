@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 export const AddSelling=()=>{
     var [company, setCompany] = useState({
-        name:"",
+        username:"",
         email:"",
         phone:""
 
