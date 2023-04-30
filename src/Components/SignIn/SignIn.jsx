@@ -80,7 +80,7 @@ async function handleSubmit () {
 }
   return (
     <div className="Auth-form-container">
-      <div className="Auth-form"  >
+      <form className="Auth-form"  >
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign In</h3>
           <div className="form-group mt-3">
@@ -91,6 +91,7 @@ async function handleSubmit () {
             onChange={(e) => setUsername(e.target.value)}
               className="form-control mt-1"
               placeholder="Enter Your Username"
+              required
             />
           </div>
           <div className="form-group mt-3">
@@ -101,6 +102,7 @@ async function handleSubmit () {
               type="password"
               className="form-control mt-1"
               placeholder="Enter password"
+              required
             />
           </div>
           <div className="form-group mt-3">
@@ -120,10 +122,11 @@ async function handleSubmit () {
            
         
           <p className="forgot-password text-right mt-2">
-            Forgot <a href="#"></a>
+            Already Have -
+             <a href="/SignUp"> Account?</a>
           </p>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
