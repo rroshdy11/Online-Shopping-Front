@@ -55,7 +55,7 @@ function BasicExample() {
             <Nav className="me-auto">
               <Nav.Link href="/SellerHome">Home</Nav.Link>
               <Nav.Link href="/SellerLogs">Pruchased Logs</Nav.Link>
-              <Nav.Link href="/SellingProducts">My Products</Nav.Link>
+              <Nav.Link href="/SellerProducts">My Products</Nav.Link>
               <Nav.Link href="/AddProduct">Add Product</Nav.Link>
               <Nav.Link style={{color:"red"}} href="/SignIn" onClick={()=>{localStorage.clear()}}>Logout</Nav.Link>
             </Nav>

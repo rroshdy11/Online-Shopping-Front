@@ -15,6 +15,8 @@ import { CompanyRequests } from './Components/Shipping/CompanyRequests';
 import { SignUp } from './Components/SingUp/SignUp';
 import SellingHome from './Components/Selling/SellingHome';
 import { SellerLogs } from './Components/Selling/SellerLogs';
+import { SellerProducts } from './Components/Selling/SellerProducts';
+import { AddProduct } from './Components/Selling/AddProduct';
 function App() {
   
   return (
@@ -64,9 +66,12 @@ function App() {
         <Route path="/SellerLogs" element={
           <SellerLogs />
         } />
-        
-
-        
+        <Route path="/SellerProducts" element={
+          <SellerProducts />
+        } />
+        <Route path="/AddProduct" element={
+          <AddProduct />
+        } />        
 
       </Routes>
       </BrowserRouter>
