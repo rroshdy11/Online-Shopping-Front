@@ -76,7 +76,33 @@ async function handleSubmit () {
     )
 
     }
-
+    else if(role==="seller"){
+      const response= await fetch("http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/sellingCompany/login",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(user)
+    }).catch((err)=>{
+        console.log(err)
+    }
+    );
+    if(response.status===200){
+     //Store the user data in local storage
+      response.json().then((result)=>{
+        localStorage.setItem("userName",result.username)
+        localStorage.setItem("password",result.password)
+        localStorage.setItem("email",result.email)
+        localStorage.setItem("phone",result.phone)
+        localStorage.setItem("role",role)
+        localStorage.setItem("balance",result.balance)
+        alert("Login successful")})
+        window.location.href="/SellerHome"
+}
+    else{
+        alert("Invalid username or password")
+    }
+}
 }
   return (
     <div className="Auth-form-container">

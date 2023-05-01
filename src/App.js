@@ -13,6 +13,8 @@ import ShippingHome from './Components/Shipping/ShippingHome';
 import {ShippingRequests} from './Components/Shipping/ShippingRequests';
 import { CompanyRequests } from './Components/Shipping/CompanyRequests';
 import { SignUp } from './Components/SingUp/SignUp';
+import SellingHome from './Components/Selling/SellingHome';
+import { SellerLogs } from './Components/Selling/SellerLogs';
 function App() {
   
   return (
@@ -56,6 +58,14 @@ function App() {
         <Route path="/SignUp" element={
           <SignUp />
         } />
+        <Route path="/SellerHome" element={
+          <SellingHome />
+        } />
+        <Route path="/SellerLogs" element={
+          <SellerLogs />
+        } />
+        
+
         
 
       </Routes>

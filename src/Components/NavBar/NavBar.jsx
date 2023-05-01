@@ -45,6 +45,25 @@ function BasicExample() {
     </Navbar>
     )
   }
+  else if (role === "seller") {
+    return (
+      <Navbar bg="light" expand="lg" >
+        <Container>
+          <Navbar.Brand href="/SellerHome">Selling Company View</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+            <Nav className="me-auto">
+              <Nav.Link href="/SellerHome">Home</Nav.Link>
+              <Nav.Link href="/SellerLogs">Pruchased Logs</Nav.Link>
+              <Nav.Link href="/SellingProducts">My Products</Nav.Link>
+              <Nav.Link href="/AddProduct">Add Product</Nav.Link>
+              <Nav.Link style={{color:"red"}} href="/SignIn" onClick={()=>{localStorage.clear()}}>Logout</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    );
+  }
   else if(role===null){
   return (
     <Navbar bg="light" expand="lg">

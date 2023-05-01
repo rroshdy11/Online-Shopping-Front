@@ -7,7 +7,7 @@ function AllSelling() {
     const [data, setData] = useState([]);
     
     useEffect(() => {
-        fetch("http://localhost:8080/AdminServices-1.0-SNAPSHOT/api/v1/admin/getAllSellingCompanies",{
+        fetch("http://localhost:11780/AdminServices-1.0-SNAPSHOT/api/v1/admin/getAllSellingCompanies",{
             method:"GET",
             headers:{
                 "Content-Type":"application/json"
