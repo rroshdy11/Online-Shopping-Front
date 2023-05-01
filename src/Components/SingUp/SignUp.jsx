@@ -14,20 +14,20 @@ export const SignUp = () => {
   var[balance,setBalance]=useState(0);
 
   async function handleSubmit() {
-    const user = {
-      username: username,
-      password: pass,
-      firstName: firstName,
-      secondName: secondName,
-      phone: phone,
-      address: address,
-      email: email,
-      role: role,
-    };
+
     if (role === "admin") {
+      const user = {
+        username: username,
+        password: pass,
+        firstName: firstName,
+        secondName: secondName,
+        phone: phone,
+        address: address,
+        email: email
+      };
       // Show successful login alert
-      await fetch(
-        "http://localhost:8080/AdminServices-1.0-SNAPSHOT/api/v1/admin/login",
+     const response= await fetch(
+        "http://localhost:8080/AdminServices-1.0-SNAPSHOT/api/v1/admin/register",
         {
           method: "POST",
           headers: {
@@ -35,31 +35,30 @@ export const SignUp = () => {
           },
           body: JSON.stringify(user),
         }
-      )
-        .then((response) => {
-          response.json().then((result) => {
-            if (response.status === 200) {
-              localStorage.setItem("userName", result.username);
-              localStorage.setItem("password", result.password);
-              localStorage.setItem("fristName", result.firstName);
-              localStorage.setItem("secondName", result.secondName);
-              localStorage.setItem("phone", result.phone);
-              localStorage.setItem("email", result.email);
-              localStorage.setItem("role", role);
-              alert("Login successful");
-              window.location.href = "/AdminHome";
-            } else {
-              alert("Invalid username or password");
-            }
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else if (role === "delivery") {
+      );
+      const result=await response.text();
+      if(result==="Registered Successfully")
+      {
+        alert("Registered Successfully")
+        window.location.href="/SignIn"
+      }
+      else{
+        alert("User Name is already used")
+      }
+    } else if (role === "user") {
+      const user = {
+        username: username,
+        password: pass,
+        firstName: firstName,
+        secondName: secondName,
+        phone: phone,
+        address: address,
+        email: email,
+        balance:balance
+      };
       // Show successful login alert
-      await fetch(
-        "http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/shippingCompany/login",
+      const response= await fetch(
+        "http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/customer/register",
         {
           method: "POST",
           headers: {
@@ -67,26 +66,18 @@ export const SignUp = () => {
           },
           body: JSON.stringify(user),
         }
-      )
-        .then((response) => {
-          response.json().then((result) => {
-            if (response.status === 200) {
-              localStorage.setItem("userName", result.username);
-              localStorage.setItem("password", result.password);
-              localStorage.setItem("geography", result.geography);
-              localStorage.setItem("phone", result.phone);
-              localStorage.setItem("email", result.email);
-              localStorage.setItem("role", role);
-              alert("Login successful");
-              window.location.href = "/ShippingHome";
-            } else {
-              alert("Invalid username or password");
-            }
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      );
+
+      const result=await response.text();
+      if(result==="Customer registered successfully")
+      {
+        alert("Registered Successfully")
+        window.location.href="/SignIn"
+      }
+      else{
+
+        alert("User Name is already used")
+      }
     }
   }
   return (
