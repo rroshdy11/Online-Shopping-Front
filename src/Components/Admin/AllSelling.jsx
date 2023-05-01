@@ -32,14 +32,14 @@ function AllSelling() {
                     <td>{item.phone}</td>
                     <td>{item.balance}</td>
                     <td>{item.password}</td>
-                    <td><button className="btn btn-danger" onClick={()=>{deleteCompany(item.name)}}>Delete</button></td>
+                    <td><button className="btn btn-danger" onClick={()=>{deleteCompany(item.username)}}>Delete</button></td>
                 </tr>
             )
         })
     }
     async function deleteCompany(name){
         const res = await fetch(
-            `http://localhost:8080/AdminServices-1.0-SNAPSHOT/api/v1/admin/deleteSellingCompany/${name}`,
+            `http://localhost:11780/AdminServices-1.0-SNAPSHOT/api/v1/admin/deleteSellingCompany/${name}`,
             {
                 method: "Delete",
                 headers: {

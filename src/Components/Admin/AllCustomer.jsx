@@ -7,7 +7,7 @@ function AllCustomer() {
     const [data, setData] = useState([]);
     
     useEffect(() => {
-        fetch("http://localhost:8080/AdminServices-1.0-SNAPSHOT/api/v1/admin/getAllCustomers",{
+        fetch("http://localhost:11780/AdminServices-1.0-SNAPSHOT/api/v1/admin/getAllCustomers",{
             method:"GET",
             headers:{
                 "Content-Type":"application/json"

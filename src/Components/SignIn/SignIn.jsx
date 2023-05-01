@@ -13,7 +13,7 @@ async function handleSubmit () {
     }
     if (role==="admin") {
         // Show successful login alert
-        await fetch("http://localhost:8080/AdminServices-1.0-SNAPSHOT/api/v1/admin/login",{
+        await fetch("http://localhost:11780/AdminServices-1.0-SNAPSHOT/api/v1/admin/login",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

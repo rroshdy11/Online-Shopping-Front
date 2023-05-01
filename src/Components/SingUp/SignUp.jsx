@@ -27,7 +27,7 @@ export const SignUp = () => {
       };
       // Show successful login alert
      const response= await fetch(
-        "http://localhost:8080/AdminServices-1.0-SNAPSHOT/api/v1/admin/register",
+        "http://localhost:11780/AdminServices-1.0-SNAPSHOT/api/v1/admin/register",
         {
           method: "POST",
           headers: {

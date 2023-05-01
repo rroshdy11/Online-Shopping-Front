@@ -9,7 +9,7 @@ export const AddShipping=()=>{
     });
     const handleSubmit =async  () => {
         const res = await fetch(
-            "http://localhost:8080/AdminServices-1.0-SNAPSHOT/api/v1/admin/addShippingCompany",
+            "http://localhost:11780/AdminServices-1.0-SNAPSHOT/api/v1/admin/addShippingCompany",
             {
               method: "POST",
               body: JSON.stringify(company),
