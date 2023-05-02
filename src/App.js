@@ -17,6 +17,7 @@ import SellingHome from './Components/Selling/SellingHome';
 import { SellerLogs } from './Components/Selling/SellerLogs';
 import { SellerProducts } from './Components/Selling/SellerProducts';
 import { AddProduct } from './Components/Selling/AddProduct';
+import CustomerHome from './Customer/CustomerHome';
 function App() {
   
   return (
@@ -71,7 +72,10 @@ function App() {
         } />
         <Route path="/AddProduct" element={
           <AddProduct />
-        } />        
+        } /> 
+      <Route path="/CustomerHome" element={
+          <CustomerHome />
+        } />
 
       </Routes>
       </BrowserRouter>

@@ -1,16 +1,20 @@
 import { useState } from "react";
 import "./SignIn.css";
 import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 export const SignIn = () => {
   var [username, setUsername] = useState("");
   var [pass, setPass] = useState("");
-  var [role, setRole] = useState("user");
+  var [role, setRole] = useState("Customer");
+  //assign cookies to the current session
+ 
 
 async function handleSubmit () {
     const user={
         username:username,
         password:pass
     }
+  
     if (role==="admin") {
         // Show successful login alert
         await fetch("http://localhost:11780/AdminServices-1.0-SNAPSHOT/api/v1/admin/login",{
@@ -103,6 +107,35 @@ async function handleSubmit () {
         alert("Invalid username or password")
     }
 }
+    else if(role==="Customer"){
+   await fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/customer/login/${user.username}/${user.password}`,{
+        method:"GET",
+        headers:{
+            "Content-Type":"application/json",            
+        },
+        credentials:"include",
+
+    }).then((response)=>{
+      
+      if (response.status==200){
+        
+        response.json().then((result)=>{
+          alert("Login successful")
+          localStorage.setItem("JSESSIONID",result.sessionID)
+          localStorage.setItem("role",role)
+         //move to the home page with the same cookies in this page
+          window.location.href="/CustomerHome"
+
+        })
+      }
+      else{
+        alert("Invalid username or password")
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
 }
   return (
     <div className="Auth-form-container">
@@ -134,7 +167,7 @@ async function handleSubmit () {
           <div className="form-group mt-3">
             <label>Role</label>
           <select className="form-select mt-3" aria-label="Default select example" onChange={(e) => setRole(e.target.value)}>
-                <option value="user">User</option>
+                <option value="Customer">User</option>
                 <option value="admin">Admin</option>
                 <option value="seller">Seller</option>
                 <option value="delivery">Delivery</option>

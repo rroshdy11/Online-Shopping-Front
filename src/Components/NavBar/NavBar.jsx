@@ -64,6 +64,25 @@ function BasicExample() {
       </Navbar>
     );
   }
+  else if (role === "Customer") {
+    return (
+      <Navbar bg="light" expand="lg" >
+        <Container>
+          <Navbar.Brand href="/CustomerHome">Customer View</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+            <Nav className="me-auto">
+              <Nav.Link href="/CustomerHome">Home</Nav.Link>
+              <Nav.Link href="/CustomerLogs">My Logs</Nav.Link>
+              <Nav.Link href="/CustomerProducts">All Products</Nav.Link>
+              <Nav.Link style={{color:"red"}} href="/SignIn" onClick={()=>{localStorage.clear()}}>Logout</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    );
+  }
+
   else if(role===null){
   return (
     <Navbar bg="light" expand="lg">
