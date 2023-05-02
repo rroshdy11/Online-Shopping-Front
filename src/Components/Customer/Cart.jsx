@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import { Trash } from 'react-bootstrap-icons';
+import { Cart, Check, Trash } from 'react-bootstrap-icons';
 
-export const SellerProducts = () => {
-  if(localStorage.getItem("role")!=="seller"){
+export const CustomerCart = () => {
+  if(localStorage.getItem("role")!=="Customer"){
     window.location.href="/SignIn"
   }
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-      fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/sellingCompany/getProducts/${localStorage.getItem("userName")}`,{
+      fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/customer/getCart`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "Accept": "application/json",
+            "Cookie":localStorage.getItem("JSESSIONID")
         }
+        ,credentials: 'include'
       }).then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -23,30 +25,53 @@ export const SellerProducts = () => {
 
     }, []);
 
-      const deleteProduct =async (productId) => {
-      const res= await fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/sellingCompany/deleteProduct/${localStorage.getItem("userName")}/${productId}`,{
+      const remove =async (productId) => {
+      const res= await fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/customer/removeProductFromCart/${productId}`,{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "Accept": "application/json",
+          "Cookie":localStorage.getItem("JSESSIONID")
         }
+        ,credentials: 'include'
       });
       const result=await res.text();
-      if(result==="Product Deleted Successfully")
+      if(result==="Product removed from cart successfully")
       {
-        alert("Deleted Successfully")
-        window.location.href="/SellerProducts"
+        alert("Product removed from cart successfullyy")
+        window.location.reload();
+       
       }
       else{
         alert("Error")
       }
     }
 
-  
+    const checkout =async () => {
+        const res= await fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/customer/BuyProducts`,{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Cookie":localStorage.getItem("JSESSIONID")
+            }
+            ,credentials: 'include'
+        });
+        const result=await res.text();
+        if(result==="Products bought successfully")
+        {
+            alert("Products bought successfully")
+            window.location.reload();
+        }
+        else{
+            alert("Error")
+        }
+    }
+
     return (
       <>
       <div >
-        <h1 className="head">Shop</h1>
+        <h1 className="head">MY CART</h1>
           {console.log(products)}
           <div className="container"
           style={
@@ -54,6 +79,7 @@ export const SellerProducts = () => {
           >
           
           {products.map((product,index) => (
+            
                <Card
                style={  {width:"22%", marginBottom:"10px" ,borderRadius: "5px"
                ,
@@ -66,6 +92,7 @@ export const SellerProducts = () => {
                <Card.Body>
                  <Card.Title>{product.productName}</Card.Title>
                  <Card.Subtitle className="mb-2 text-muted">Product Id :{product.productId}</Card.Subtitle>
+                 
                  <Card.Text
                   style={{overflow: "hidden",
                   textOverflow: "ellipsis",
@@ -77,12 +104,10 @@ export const SellerProducts = () => {
                   </Card.Text>
                    <Card.Text>
                    Price : {product.productPrice}
-                   <br/>
-                    Quantity : {product.productStock}
                  </Card.Text>
                  <Card.Link href="#">
                   { product.productStock!==0&&
-                  <Trash onClick={()=>deleteProduct(product.productId)}/>
+                  <button className='btn btn-danger' onClick={()=>remove(product.productId)}><Trash/></button>
                   }   
                   {
                     product.productStock===0&&
@@ -94,7 +119,9 @@ export const SellerProducts = () => {
              </Card>
           ))}
           </div> 
-        
+          {products.length!==0&&
+          <button className="btn btn-primary" onClick={()=>checkout()}>Checkout</button>
+        }
       </div>
       </>
     );

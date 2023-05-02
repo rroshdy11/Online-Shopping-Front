@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import { Trash } from 'react-bootstrap-icons';
+import { Cart, Trash } from 'react-bootstrap-icons';
 
-export const SellerProducts = () => {
-  if(localStorage.getItem("role")!=="seller"){
+export const Market = () => {
+  if(localStorage.getItem("role")!=="Customer"){
     window.location.href="/SignIn"
   }
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-      fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/sellingCompany/getProducts/${localStorage.getItem("userName")}`,{
+      fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/product/getAllProducts`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -23,19 +23,21 @@ export const SellerProducts = () => {
 
     }, []);
 
-      const deleteProduct =async (productId) => {
-      const res= await fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/sellingCompany/deleteProduct/${localStorage.getItem("userName")}/${productId}`,{
-        method: "DELETE",
+      const addToCart =async (productId) => {
+      const res= await fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/customer/addProductToCart/${productId}`,{
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "Accept": "application/json",
+          "Cookie":localStorage.getItem("JSESSIONID")
         }
+        ,credentials: 'include'
       });
       const result=await res.text();
-      if(result==="Product Deleted Successfully")
+      if(result==="Product added to cart successfully")
       {
-        alert("Deleted Successfully")
-        window.location.href="/SellerProducts"
+        alert("Product added to cart successfully")
+       
       }
       else{
         alert("Error")
@@ -54,6 +56,7 @@ export const SellerProducts = () => {
           >
           
           {products.map((product,index) => (
+            
                <Card
                style={  {width:"22%", marginBottom:"10px" ,borderRadius: "5px"
                ,
@@ -66,6 +69,7 @@ export const SellerProducts = () => {
                <Card.Body>
                  <Card.Title>{product.productName}</Card.Title>
                  <Card.Subtitle className="mb-2 text-muted">Product Id :{product.productId}</Card.Subtitle>
+                 
                  <Card.Text
                   style={{overflow: "hidden",
                   textOverflow: "ellipsis",
@@ -77,12 +81,10 @@ export const SellerProducts = () => {
                   </Card.Text>
                    <Card.Text>
                    Price : {product.productPrice}
-                   <br/>
-                    Quantity : {product.productStock}
                  </Card.Text>
                  <Card.Link href="#">
                   { product.productStock!==0&&
-                  <Trash onClick={()=>deleteProduct(product.productId)}/>
+                  <Cart onClick={()=>addToCart(product.productId)}/>
                   }   
                   {
                     product.productStock===0&&

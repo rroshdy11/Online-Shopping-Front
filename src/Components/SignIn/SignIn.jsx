@@ -87,25 +87,28 @@ async function handleSubmit () {
             "Content-Type":"application/json"
         },
         body:JSON.stringify(user)
-    }).catch((err)=>{
-        console.log(err)
-    }
-    );
-    if(response.status===200){
-     //Store the user data in local storage
+    }).then((response)=> {
+       if(response.status===200){
       response.json().then((result)=>{
-        localStorage.setItem("userName",result.username)
-        localStorage.setItem("password",result.password)
-        localStorage.setItem("email",result.email)
-        localStorage.setItem("phone",result.phone)
-        localStorage.setItem("role",role)
-        localStorage.setItem("balance",result.balance)
-        alert("Login successful")})
-        window.location.href="/SellerHome"
+      
+          localStorage.setItem("userName",result.username)
+          localStorage.setItem("password",result.password)
+          localStorage.setItem("balance",result.balance)
+          localStorage.setItem("phone",result.phone)
+          localStorage.setItem("email",result.email)
+          localStorage.setItem("role",role)
+          alert("Login successful")
+          window.location.href="/SellerHome"
+      }
+  )}
+  else{
+      alert("Invalid username or password")
+  }
+}).catch((err)=>{
+  console.log(err)
 }
-    else{
-        alert("Invalid username or password")
-    }
+
+)
 }
     else if(role==="Customer"){
    await fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/customer/login/${user.username}/${user.password}`,{

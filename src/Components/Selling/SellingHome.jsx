@@ -3,18 +3,20 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
 import './Selling.css'
 
 export default function SellingHome() {
-    if(localStorage.getItem("role")!=="seller"){
-        window.location.href="/SignIn"
+
+    if (localStorage.getItem("role") !== "seller") {
+        window.location.href = "/SignIn"
     }
-    //get the user info from local storage
-    var userName = localStorage.getItem("userName");
-    var password = localStorage.getItem("password");
-    var balance = localStorage.getItem("balance");
-    var phone = localStorage.getItem("phone");
-    var email = localStorage.getItem("email");
-    var role = localStorage.getItem("role");
+  var userName = localStorage.getItem("userName");
+  var password = localStorage.getItem("password");
+  var balance = localStorage.getItem("balance");
+  var phone = localStorage.getItem("phone");
+  var email = localStorage.getItem("email");
+  var role = localStorage.getItem("role");
+    
     useEffect(() => {
-        fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/sellingCompany/getCompany/${userName}`, {
+
+        fetch(`http://localhost:8080/OnlineShopping-1.0-SNAPSHOT/api/v1/sellingCompany/getCompany/${localStorage.getItem("userName")}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

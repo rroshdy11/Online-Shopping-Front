@@ -17,7 +17,11 @@ import SellingHome from './Components/Selling/SellingHome';
 import { SellerLogs } from './Components/Selling/SellerLogs';
 import { SellerProducts } from './Components/Selling/SellerProducts';
 import { AddProduct } from './Components/Selling/AddProduct';
-import CustomerHome from './Customer/CustomerHome';
+import CustomerHome from './Components/Customer/CustomerHome';
+import { CustomerLog } from './Components/Customer/CustomerLog';
+import { Market } from './Components/Customer/Market';
+import { CustomerCart } from './Components/Customer/Cart';
+import { Notifications } from './Components/Customer/Norifications';
 function App() {
   
   return (
@@ -76,6 +80,19 @@ function App() {
       <Route path="/CustomerHome" element={
           <CustomerHome />
         } />
+        <Route path="/CustomerLog" element={
+          <CustomerLog />
+        } />
+        <Route path="/Market" element={
+          <Market />
+        } />
+        <Route path="/Cart" element={
+          <CustomerCart />
+                } />
+        <Route path="/Notifications" element={
+          <Notifications />
+        } />
+
 
       </Routes>
       </BrowserRouter>

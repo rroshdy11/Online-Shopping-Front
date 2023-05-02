@@ -73,8 +73,10 @@ function BasicExample() {
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="me-auto">
               <Nav.Link href="/CustomerHome">Home</Nav.Link>
-              <Nav.Link href="/CustomerLogs">My Logs</Nav.Link>
-              <Nav.Link href="/CustomerProducts">All Products</Nav.Link>
+              <Nav.Link href="/CustomerLog">My Logs</Nav.Link>
+              <Nav.Link href="/Market">Market</Nav.Link>
+              <Nav.Link href="/Cart">Cart</Nav.Link>
+              <Nav.Link href="/Notifications">Notifications</Nav.Link>
               <Nav.Link style={{color:"red"}} href="/SignIn" onClick={()=>{localStorage.clear()}}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -91,7 +93,6 @@ function BasicExample() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/SignIn">SignIn</Nav.Link> 
             <Nav.Link href="/SignUp">SignUp</Nav.Link>
           </Nav>

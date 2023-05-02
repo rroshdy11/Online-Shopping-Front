@@ -34,6 +34,7 @@ export default function CustomerHome() {
             if(response.status===200){
                 console.log(response.data)
                 setUser(response.data)
+                localStorage.setItem("userName",response.data.username)
 
         }
         else {
